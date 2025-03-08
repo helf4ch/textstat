@@ -8,7 +8,7 @@
 		<version>3.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>ru.helf4ch</groupId>
+	<groupId>com.github.helf4ch</groupId>
 	<artifactId>textstat</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>textstat</name>
