@@ -1,0 +1,38 @@
+package com.github.helf4ch.textstat.util;
+
+import com.github.helf4ch.textstat.config.TextProperties;
+import java.util.Arrays;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class TextNormalizer {
+  private final TextProperties properties;
+
+  @Autowired
+  public TextNormalizer(TextProperties properties) {
+    this.properties = properties;
+  }
+
+  public String normalize(String text) {
+    String textNormalized = normalization(text);
+
+    List<String> stopWords = Arrays.asList(normalization(properties.getStopWords()).split(" "));
+    String[] normalizedWords = textNormalized.split(" ");
+
+    for (int i = 0; i < normalizedWords.length; ++i) {
+      if (stopWords.contains(normalizedWords[i])) {
+        normalizedWords[i] = "";
+      }
+    }
+
+    textNormalized = String.join(" ", normalizedWords);
+
+    return normalization(textNormalized);
+  }
+
+  private String normalization(String text) {
+    return text.trim().toLowerCase().replaceAll("[^a-z0-9 ]", " ").trim().replaceAll(" +", " ");
+  }
+}
