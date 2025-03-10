@@ -6,12 +6,12 @@ import org.springframework.data.jdbc.core.mapping.AggregateReference;
 public class TextWords {
   @Id private Long id;
   private AggregateReference<TextStat, Long> textId;
-  private AggregateReference<WordStat, Long> wordId;
+  private AggregateReference<WordStat, Integer> wordId;
   private Integer wordPos;
 
   public TextWords(
       AggregateReference<TextStat, Long> textId,
-      AggregateReference<WordStat, Long> wordId,
+      AggregateReference<WordStat, Integer> wordId,
       Integer wordPos) {
     this.textId = textId;
     this.wordId = wordId;
@@ -34,11 +34,11 @@ public class TextWords {
     this.textId = textId;
   }
 
-  public AggregateReference<WordStat, Long> getWordId() {
+  public AggregateReference<WordStat, Integer> getWordId() {
     return wordId;
   }
 
-  public void setWordId(AggregateReference<WordStat, Long> wordId) {
+  public void setWordId(AggregateReference<WordStat, Integer> wordId) {
     this.wordId = wordId;
   }
 
