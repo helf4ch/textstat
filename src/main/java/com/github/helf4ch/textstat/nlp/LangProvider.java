@@ -1,4 +1,4 @@
-package com.github.helf4ch.textstat.lang;
+package com.github.helf4ch.textstat.nlp;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LangProvider {
-  private Logger logger = LoggerFactory.getLogger(EnglishProvider.class);
+  private Logger logger = LoggerFactory.getLogger(LangProvider.class);
 
   private String tokensModelPath = "models/tokens/";
   private TokenizerModel tokenizerModel;

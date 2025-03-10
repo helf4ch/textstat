@@ -1,4 +1,6 @@
-package com.github.helf4ch.textstat.lang;
+package com.github.helf4ch.textstat.nlp.lang;
+
+import com.github.helf4ch.textstat.nlp.LangProvider;
 
 public class EnglishProvider extends LangProvider {
   private static final String tokenizerModelName = "opennlp-en-ud-ewt-tokens-1.2-2.5.0.bin";

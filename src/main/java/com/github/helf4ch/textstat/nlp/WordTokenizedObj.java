@@ -1,6 +1,6 @@
-package com.github.helf4ch.textstat.lang;
+package com.github.helf4ch.textstat.nlp;
 
-public class SentenceTokenizedObj {
+public class WordTokenizedObj {
   private String text;
   private String[] tokens;
 
