@@ -15,7 +15,28 @@ public class TextNormalizer {
     this.properties = properties;
   }
 
-  public String normalize(String text) {
+  public class TextObj {
+    private String text;
+    private String textNormalized;
+
+    public String getText() {
+      return text;
+    }
+
+    private void setText(String text) {
+      this.text = text;
+    }
+
+    public String getTextNormalized() {
+      return textNormalized;
+    }
+
+    private void setTextNormalized(String textNormalized) {
+      this.textNormalized = textNormalized;
+    }
+  }
+
+  public TextObj normalize(String text) {
     String textNormalized = normalization(text);
 
     List<String> stopWords = Arrays.asList(normalization(properties.getStopWords()).split(" "));
@@ -29,7 +50,11 @@ public class TextNormalizer {
 
     textNormalized = String.join(" ", normalizedWords);
 
-    return normalization(textNormalized);
+    TextObj result = new TextObj();
+    result.setText(text);
+    result.setTextNormalized(textNormalized);
+
+    return result;
   }
 
   private String normalization(String text) {
