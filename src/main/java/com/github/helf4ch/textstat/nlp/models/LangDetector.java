@@ -1,7 +1,8 @@
-package com.github.helf4ch.textstat.nlp;
+package com.github.helf4ch.textstat.nlp.models;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import opennlp.tools.langdetect.Language;
 import opennlp.tools.langdetect.LanguageDetectorME;
 import opennlp.tools.langdetect.LanguageDetectorModel;
@@ -27,6 +28,7 @@ public class LangDetector {
 
   public Language detect(String text) {
     LanguageDetectorME categorizer = new LanguageDetectorME(model);
+    System.out.println(Arrays.toString(categorizer.getSupportedLanguages()));
     return categorizer.predictLanguage(text);
   }
 }

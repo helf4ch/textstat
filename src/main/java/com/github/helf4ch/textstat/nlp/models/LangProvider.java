@@ -1,4 +1,4 @@
-package com.github.helf4ch.textstat.nlp;
+package com.github.helf4ch.textstat.nlp.models;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +9,9 @@ import opennlp.tools.tokenize.TokenizerModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LangProvider {
+// models can be downloaded here:
+// https://opennlp.apache.org/models.html
+public class LangProvider implements ILangProvider {
   private Logger logger = LoggerFactory.getLogger(LangProvider.class);
 
   private String tokensModelPath = "models/tokens/";
@@ -36,19 +38,13 @@ public class LangProvider {
     }
   }
 
-  public WordTokenizedObj wordTokenization(String text) {
-    WordTokenizedObj obj = new WordTokenizedObj();
+  public String[] tokenize(String text) {
     TokenizerME tokenizer = new TokenizerME(tokenizerModel);
-    obj.setText(text);
-    obj.setTokens(tokenizer.tokenize(text));
-    return obj;
+    return tokenizer.tokenize(text);
   }
 
-  public SentenceTokenizedObj sentenceTokenization(String text) {
-    SentenceTokenizedObj obj = new SentenceTokenizedObj();
+  public String[] sentDetect(String text) {
     SentenceDetectorME sentenceDetector = new SentenceDetectorME(sentenceModel);
-    obj.setText(text);
-    obj.setTokens(sentenceDetector.sentDetect(text));
-    return obj;
+    return sentenceDetector.sentDetect(text);
   }
 }
