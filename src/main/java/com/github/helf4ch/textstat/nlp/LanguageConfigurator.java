@@ -1,12 +1,17 @@
 package com.github.helf4ch.textstat.nlp;
 
 import com.github.helf4ch.textstat.nlp.models.ILangProvider;
+import java.util.HashMap;
 import java.util.Map;
 
 // the language names can be found here:
 // https://downloads.apache.org/opennlp/models/langdetect/1.8.3/README.txt
 public class LanguageConfigurator {
   private Map<String, ILangProvider> stringToProvider;
+
+  public LanguageConfigurator() {
+    stringToProvider = new HashMap<String, ILangProvider>();
+  }
 
   public void add(String lang, ILangProvider provider) {
     stringToProvider.put(lang, provider);
