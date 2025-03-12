@@ -3,21 +3,12 @@ package com.github.helf4ch.textstat.model;
 import org.springframework.data.annotation.Id;
 
 public class WordStat {
-  @Id private Integer id;
-  private String word;
+  @Id private String word;
   private Integer useCount;
 
   public WordStat(String word, Integer useCount) {
     this.word = word;
     this.useCount = useCount;
-  }
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
   }
 
   public String getWord() {
@@ -38,6 +29,6 @@ public class WordStat {
 
   @Override
   public String toString() {
-    return "WordStat [id=" + id + ", word=" + word + ", useCount=" + useCount + "]";
+    return "WordStat [word=" + word + ", useCount=" + useCount + "]";
   }
 }

@@ -10,10 +10,6 @@ public class TextStat {
   private Integer avgWordLenght;
   private Integer sentencesCount;
 
-  public TextStat(String text) {
-    this.text = text;
-  }
-
   public Long getId() {
     return id;
   }
