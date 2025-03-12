@@ -56,7 +56,6 @@ public class DocumentController {
       count++;
     }
 
-    textStat.setTextNormalized(String.join(" ", words));
     textStat.setWordCount(tokenized.length);
     textStat.setUniqWordCount(Set.of(tokenized).size());
     textStat.setAvgWordLenght(lengthSum / count);
