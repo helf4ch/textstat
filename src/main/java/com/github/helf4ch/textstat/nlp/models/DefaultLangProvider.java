@@ -2,7 +2,7 @@ package com.github.helf4ch.textstat.nlp.models;
 
 import opennlp.tools.tokenize.SimpleTokenizer;
 
-public class DefaultLangProvider implements ILangProvider {
+public class DefaultLangProvider implements NlProcessor {
   public String[] tokenize(String text) {
     return SimpleTokenizer.INSTANCE.tokenize(text);
   }

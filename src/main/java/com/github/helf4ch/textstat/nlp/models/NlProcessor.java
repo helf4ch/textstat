@@ -1,6 +1,6 @@
 package com.github.helf4ch.textstat.nlp.models;
 
-public interface ILangProvider {
+public interface NlProcessor {
 
   public String[] tokenize(String text);
 

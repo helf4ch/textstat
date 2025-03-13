@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 // models can be downloaded here:
 // https://opennlp.apache.org/models.html
-public class LangProvider implements ILangProvider {
+public class LangProvider implements NlProcessor {
   private Logger logger = LoggerFactory.getLogger(LangProvider.class);
 
   private String tokensModelPath = "models/tokens/";

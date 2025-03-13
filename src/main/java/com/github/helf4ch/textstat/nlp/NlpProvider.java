@@ -1,8 +1,8 @@
 package com.github.helf4ch.textstat.nlp;
 
 import com.github.helf4ch.textstat.nlp.models.DefaultLangProvider;
-import com.github.helf4ch.textstat.nlp.models.ILangProvider;
 import com.github.helf4ch.textstat.nlp.models.LangDetector;
+import com.github.helf4ch.textstat.nlp.models.NlProcessor;
 import com.github.helf4ch.textstat.nlp.models.lang.EngProvider;
 import com.github.helf4ch.textstat.nlp.models.lang.RusProvider;
 import com.github.helf4ch.textstat.nlp.models.lang.UkrProvider;
@@ -21,8 +21,8 @@ public class NlpProvider {
     configurator.addFamily(new UkrProvider(), "ukr", "bel");
   }
 
-  private ILangProvider getProvider(String lang) {
-    ILangProvider provider = configurator.get(lang);
+  private NlProcessor getProvider(String lang) {
+    NlProcessor provider = configurator.get(lang);
 
     if (provider == null) {
       provider = new DefaultLangProvider();
@@ -37,13 +37,13 @@ public class NlpProvider {
 
   public String[] tokenize(String text) {
     String lang = languageDetect(text);
-    ILangProvider provider = getProvider(lang);
+    NlProcessor provider = getProvider(lang);
     return provider.tokenize(text);
   }
 
   public String[] sentDetect(String text) {
     String lang = languageDetect(text);
-    ILangProvider provider = getProvider(lang);
+    NlProcessor provider = getProvider(lang);
     return provider.sentDetect(text);
   }
 }
