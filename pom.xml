@@ -12,7 +12,7 @@
 	<artifactId>textstat</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>textstat</name>
-	<description>Backend for simple text analysys</description>
+	<description>Backend for simple text analysis with opennlp</description>
 	<url/>
 	<licenses>
 		<license/>
