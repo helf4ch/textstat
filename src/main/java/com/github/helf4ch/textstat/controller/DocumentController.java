@@ -1,6 +1,5 @@
 package com.github.helf4ch.textstat.controller;
 
-import com.github.helf4ch.textstat.dto.TopWord;
 import com.github.helf4ch.textstat.dto.TopWordsList;
 import com.github.helf4ch.textstat.model.StopTokens;
 import com.github.helf4ch.textstat.model.TextStat;
@@ -11,13 +10,14 @@ import com.github.helf4ch.textstat.repository.StopTokensRepository;
 import com.github.helf4ch.textstat.repository.TextStatRepository;
 import com.github.helf4ch.textstat.repository.TextWordsRepository;
 import com.github.helf4ch.textstat.repository.WordStatRepository;
-import com.github.helf4ch.textstat.view.DocumentStatisticView;
+import com.github.helf4ch.textstat.view.AllDocumentsStatisticsView;
+import com.github.helf4ch.textstat.view.DocumentStatisticsView;
 import com.github.helf4ch.textstat.view.GetDocumentView;
 import com.github.helf4ch.textstat.view.PostDocumentView;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +72,7 @@ public class DocumentController {
       }
 
       textStat.setWordCount(tokenized.length);
-      textStat.setUniqWordCount(Set.of(tokenized).size());
+      textStat.setUniqWordCount(new HashSet<String>(words).size());
       textStat.setAvgWordLenght(lengthSum / count);
 
       textStat.setSentencesCount(nlpProvider.sentDetect(postDocumentView.text()).length);
@@ -128,7 +128,7 @@ public class DocumentController {
   }
 
   @GetMapping("/{id}/statistics")
-  public ResponseEntity<DocumentStatisticView> findDocumentStatisticById(
+  public ResponseEntity<DocumentStatisticsView> findDocumentStatisticById(
       @PathVariable("id") Long id) {
     Optional<TextStat> textStatOpt = textStatRepository.findById(id);
 
@@ -137,8 +137,8 @@ public class DocumentController {
     }
 
     TextStat textStat = textStatOpt.get();
-    DocumentStatisticView result =
-        new DocumentStatisticView(
+    DocumentStatisticsView result =
+        new DocumentStatisticsView(
             textStat.getWordCount(),
             textStat.getUniqWordCount(),
             textStat.getAvgWordLenght(),
@@ -146,17 +146,44 @@ public class DocumentController {
     return ResponseEntity.status(HttpStatus.OK).body(result);
   }
 
+  @GetMapping("/statistics")
+  public ResponseEntity<AllDocumentsStatisticsView> calculateAllDocumentsStatistics() {
+    AllDocumentsStatisticsView result = textStatRepository.calculateAllStatistic();
+    return ResponseEntity.status(HttpStatus.OK).body(result);
+  }
+
+  @GetMapping("/{id}/top-words")
+  public ResponseEntity<TopWordsList> listTopWordsInText(
+      @PathVariable("id") Long id,
+      @RequestParam(name = "limit", defaultValue = "10") Integer limit) {
+    List<WordStat> wordStats = textWordsRepository.selectTopWordsInText(id, limit);
+
+    if (wordStats.isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
+    }
+
+    return ResponseEntity.status(HttpStatus.OK).body(new TopWordsList(wordStats));
+  }
+
   @GetMapping("/top-words")
   public ResponseEntity<TopWordsList> listTopWords(
       @RequestParam(name = "limit", defaultValue = "10") Integer limit) {
     List<WordStat> wordStats = wordStatRepository.selectTopWords(limit);
 
-    List<TopWord> topWords = new ArrayList<TopWord>();
-    for (WordStat wordStat : wordStats) {
-      topWords.add(new TopWord(wordStat.getWord(), wordStat.getUseCount()));
+    return ResponseEntity.status(HttpStatus.OK).body(new TopWordsList(wordStats));
+  }
+
+  @GetMapping("/{id}/bigrams")
+  public ResponseEntity<TopWordsList> listBigrams(@PathVariable("id") Long id) {
+    Optional<TextStat> textStatOpt = textStatRepository.findById(id);
+
+    if (textStatOpt.isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
     }
 
-    return ResponseEntity.status(HttpStatus.OK).body(new TopWordsList(topWords));
+    List<WordStat> wordStats = textWordsRepository.selectBigramsInText(id);
+
+    return ResponseEntity.status(HttpStatus.OK).body(new TopWordsList(wordStats));
   }
 
   @GetMapping("/search")
