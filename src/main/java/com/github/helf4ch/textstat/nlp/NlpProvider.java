@@ -12,7 +12,7 @@ import com.github.helf4ch.textstat.nlp.models.lang.UkrProvider;
  * настраивать обработчики для конкретных языков, а так же настраивать семейства языков.
  *
  * @see nlp/models/NlProcessor.java
- * @see nlp/LanguageConfigurator.java
+ * @see LanguageConfigurator.java
  * @example controller/DocumentController.java
  */
 public class NlpProvider {
