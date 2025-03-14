@@ -2,6 +2,7 @@ package com.github.helf4ch.textstat.model;
 
 import org.springframework.data.annotation.Id;
 
+/** Таблица хранит в себе список всех слов. Для каждого слова есть счетчик использования. */
 public class WordStat {
   @Id private String word;
   private Integer useCount;

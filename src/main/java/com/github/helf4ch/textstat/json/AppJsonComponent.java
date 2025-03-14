@@ -11,6 +11,7 @@ import org.springframework.boot.jackson.JsonComponent;
 @JsonComponent
 public class AppJsonComponent {
 
+  /// Позволяет сериализовать список элементов как [<первый>, <второй>, ...]
   public static class ListSerializer<T> extends JsonSerializer<Iterable<T>> {
 
     @Override
@@ -26,6 +27,7 @@ public class AppJsonComponent {
     }
   }
 
+  /// Позволяет сериализовать в виде {"word1": <use_count>, "word2": <use_count>, ...}
   public static class TopWordsSerializer extends JsonSerializer<TopWordsList> {
 
     @Override
@@ -36,6 +38,8 @@ public class AppJsonComponent {
       for (WordStat topWord : value.topWords()) {
         jgen.writeNumberField(topWord.getWord(), topWord.getUseCount());
       }
+
+      jgen.writeEndObject();
     }
   }
 }

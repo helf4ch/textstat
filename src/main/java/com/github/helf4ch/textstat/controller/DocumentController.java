@@ -60,6 +60,7 @@ public class DocumentController {
       for (String token : tokenized) {
         token = token.toLowerCase();
 
+        /// Если токен в списке stop, то пропускаем
         Optional<StopTokens> stopTokenOpt = stopTokensrepository.findById(token);
         if (stopTokenOpt.isPresent()) {
           continue;

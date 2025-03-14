@@ -4,8 +4,12 @@ import com.github.helf4ch.textstat.nlp.models.NlProcessor;
 import java.util.HashMap;
 import java.util.Map;
 
-// the language names can be found here:
-// https://downloads.apache.org/opennlp/models/langdetect/1.8.3/README.txt
+/**
+ * Класс, содержащий в себе классы-обработчики текста для различных языков.
+ *
+ * @see nlp/models/NlProcessor.java
+ * @example nlp/NlpProvider.java
+ */
 public class LanguageConfigurator {
   private Map<String, NlProcessor> stringToProvider;
 
@@ -13,16 +17,19 @@ public class LanguageConfigurator {
     stringToProvider = new HashMap<String, NlProcessor>();
   }
 
+  /// Добавляет обработчик provider для языка lang.
   public void add(String lang, NlProcessor provider) {
     stringToProvider.put(lang, provider);
   }
 
+  /// Добавляет обработчик provider для множества языков langs.
   public void addFamily(NlProcessor provider, String... langs) {
     for (String lang : langs) {
       stringToProvider.put(lang, provider);
     }
   }
 
+  /// Возвращяет обработчик для языка lang.
   public NlProcessor get(String lang) {
     return stringToProvider.get(lang);
   }

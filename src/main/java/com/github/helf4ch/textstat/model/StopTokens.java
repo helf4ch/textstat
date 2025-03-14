@@ -2,6 +2,7 @@ package com.github.helf4ch.textstat.model;
 
 import org.springframework.data.annotation.Id;
 
+/** Таблица, хранящая в себе токены, которые должны быть удалены при нормализации текста. */
 public class StopTokens {
   @Id private String token;
   private String type;

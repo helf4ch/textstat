@@ -2,6 +2,7 @@ package com.github.helf4ch.textstat.model;
 
 import org.springframework.data.annotation.Id;
 
+/** Таблица со статистикой текста. */
 public class TextStat {
   @Id private Long id;
   private String text;

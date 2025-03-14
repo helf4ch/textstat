@@ -8,6 +8,12 @@ import opennlp.tools.langdetect.LanguageDetectorModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Класс, предоставляющий функции OpenNLP Language Detection.
+ * https://opennlp.apache.org/docs/1.9.1/manual/opennlp.html#tools.langdetect
+ *
+ * @example nlp/NlpProvider.java
+ */
 public class LangDetector {
   private Logger logger = LoggerFactory.getLogger(LangDetector.class);
 

@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface WordStatRepository extends CrudRepository<WordStat, String> {
 
+  /// Добавляет новое слово, если его нет. Если есть, то увеличивает счетчик use_count на 1.
   @Modifying
   @Query(
       "MERGE INTO word_stat AS target USING (SELECT CAST(:word AS VARCHAR(128)) AS word) AS source"

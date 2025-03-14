@@ -3,6 +3,10 @@ package com.github.helf4ch.textstat.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
+/**
+ * Таблица реализует связь многие ко многим. Хранит в себе список слов word и их позицию word_pos в
+ * тексте text_id.
+ */
 public class TextWords {
   @Id private Long id;
   private AggregateReference<TextStat, Long> textId;
